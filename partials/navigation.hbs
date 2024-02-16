@@ -1,0 +1,67 @@
+{{^if isSecondary}}
+    <ul id="navi" class="nav"></ul>
+    <script>
+        //TODO [sub] auswerten ... :( {{has}} kann es natürlich nicht.
+        function nav_generator(links, label, url){
+            if(label.startsWith("[sub]")){
+                label = label.replace("[sub]", "");
+                var closing = label.indexOf("]");
+                var parent_label = label.substring(1, closing);
+                label = label.slice(closing+1);
+                if(typeof links[parent_label] !== 'object'){
+                    var main_url = links[parent_label];
+                    links[parent_label] = {
+                        url : main_url,
+                        [label] : url
+                    }
+                }else{
+                    links[parent_label][label] = url;
+                }
+            }else{
+                links[label] = url;
+            }
+        }
+
+        var links = {};
+        {{#foreach navigation}}
+            nav_generator(links, "{{label}}", "{{url}}");
+            
+        {{/foreach}}
+
+        var navi = document.getElementById("navi");
+        Object.entries(links).forEach(([key, value]) => {
+            var li = document.createElement("li");
+            var link = document.createElement("a");
+            if(typeof value === 'object'){
+                link.innerText = key;
+                link.href = value["url"];
+                var sub = document.createElement("ul");
+                Object.entries(value).forEach(([inner_key, inner_value]) => {
+                    if(inner_key === "url") return;
+                    var inner_li = document.createElement("li");
+                    var inner_link = document.createElement("a");
+                    inner_link.innerText = inner_key;
+                    inner_link.href = inner_value;
+                    inner_li.appendChild(inner_link);
+                    sub.appendChild(inner_li);
+                });
+                li.appendChild(link);
+                li.appendChild(sub);
+            }else{
+                link.innerText = key;
+                link.href = value;
+                li.appendChild(link);
+            }
+            navi.appendChild(li);
+        });
+
+    </script>
+{{else}}
+    <ul class="nav">
+        <!-- Loop through the navigation items -->
+        {{#foreach navigation}}
+        <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute="true"}}">{{label}}</a></li>
+        {{/foreach}}
+        <!-- End the loop -->
+    </ul>
+{{/if}}

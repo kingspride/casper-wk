@@ -21,6 +21,17 @@
     it should always be the last tag before the closing head tag --}}
     {{ghost_head}}
 
+    <script>
+        const root = document.querySelector(':root');
+
+        // set css variable
+        root.style.setProperty('--ghost-accent-color-text', "{{@custom.accent_color_text}}");
+
+        // to get css variable from :root
+        const color = getComputedStyle(root).getPropertyValue('--ghost-accent-color-text'); // blue
+        console.log(color);
+    </script>
+
 </head>
 <body class="{{body_class}} is-head-{{#match @custom.navigation_layout "Logo on cover"}}left-logo{{else match @custom.navigation_layout "Logo in the middle"}}middle-logo{{else}}stacked{{/match}}{{#match @custom.title_font "=" "Elegant serif"}} has-serif-title{{/match}}{{#match @custom.body_font "=" "Modern sans-serif"}} has-sans-body{{/match}}{{#if @custom.show_publication_cover}} has-cover{{/if}}">
 <div class="viewport">

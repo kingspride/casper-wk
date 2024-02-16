@@ -425,6 +425,71 @@ production stylesheet in assets/built/screen.css
     max-height: 40px;
 }
 
+/* wk's navi */
+/* ---------------------------------------------------------- */
+#navi{
+    padding: 0;
+    position: relative;
+}
+div:not(.gh-dropdown) > #navi *{
+    color: white;
+}
+
+#navi li {
+    display: inline-block;
+    list-style: none;
+    padding-left: 5pt;
+    padding-right: 5pt;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+}
+#navi a:hover{
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+#navi li ul{
+    position: absolute;
+    padding: 0;
+    margin-left: -5pt;
+    margin-top: 0;
+    width: 100pt;
+}
+#navi li ul li{
+    display: block;
+    padding-top: 5pt;
+    padding-bottom: 5pt;
+}
+
+#navi li:hover ul{
+    display: block;
+}
+
+#navi li ul{
+    border: 1px solid var(--ghost-accent-color);
+    background-color: #fff;
+    color: #000;
+    border-radius: 7px;
+    display: none;
+}
+
+#navi li ul li:first-child{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+}
+#navi li ul li:last-child{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#navi li ul li:hover{
+    cursor: pointer;
+    background-color: var(--ghost-accent-color);
+}
+#navi li ul li:hover a{
+    color: var(--ghost-accent-color-text);
+}
 
 /* Primary Navigation
 /* ---------------------------------------------------------- */
