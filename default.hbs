@@ -22,14 +22,10 @@
     {{ghost_head}}
 
     <script>
+        // enable the user to select a readable font color since the dropdown menus use the ghost-accent-color as background
+        // default is white (see package.json)
         const root = document.querySelector(':root');
-
-        // set css variable
         root.style.setProperty('--ghost-accent-color-text', "{{@custom.accent_color_text}}");
-
-        // to get css variable from :root
-        const color = getComputedStyle(root).getPropertyValue('--ghost-accent-color-text'); // blue
-        console.log(color);
     </script>
 
 </head>

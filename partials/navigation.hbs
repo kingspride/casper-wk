@@ -1,23 +1,34 @@
 {{^if isSecondary}}
+    <!-- prepare menu with empty #navi element -->
     <ul id="navi" class="nav"></ul>
     <script>
-        //TODO [sub] auswerten ... :( {{has}} kann es natürlich nicht.
+        /*
+         * function that generates a JSON / JS Oject from Ghost Navigation Entries
+         * parses [sub][main_entry_name]Sub Entry Name syntax
+         * JSON represents Menu Structure
+         * Main Entry still can have an url
+         */
         function nav_generator(links, label, url){
             if(label.startsWith("[sub]")){
+                // create sub entry
                 label = label.replace("[sub]", "");
                 var closing = label.indexOf("]");
                 var parent_label = label.substring(1, closing);
                 label = label.slice(closing+1);
                 if(typeof links[parent_label] !== 'object'){
+                    // if first sub is to be appended to main,
+                    // replace url string with Object that holds subs and main url
                     var main_url = links[parent_label];
                     links[parent_label] = {
                         url : main_url,
                         [label] : url
                     }
                 }else{
+                    // otherwise, just append the next sub
                     links[parent_label][label] = url;
                 }
             }else{
+                // just append a main to the menu
                 links[label] = url;
             }
         }
@@ -25,14 +36,15 @@
         var links = {};
         {{#foreach navigation}}
             nav_generator(links, "{{label}}", "{{url}}");
-            
         {{/foreach}}
 
+        // finally create menu under #navi element
         var navi = document.getElementById("navi");
         Object.entries(links).forEach(([key, value]) => {
             var li = document.createElement("li");
             var link = document.createElement("a");
             if(typeof value === 'object'){
+                // create sub ul in main li
                 link.innerText = key;
                 link.href = value["url"];
                 var sub = document.createElement("ul");
@@ -48,6 +60,7 @@
                 li.appendChild(link);
                 li.appendChild(sub);
             }else{
+                // just append next main li
                 link.innerText = key;
                 link.href = value;
                 li.appendChild(link);
@@ -57,6 +70,7 @@
 
     </script>
 {{else}}
+    {{!-- for secondary navigation (bottom of site), just use standard code from Ghost --}}
     <ul class="nav">
         <!-- Loop through the navigation items -->
         {{#foreach navigation}}
