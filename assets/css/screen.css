@@ -1467,6 +1467,10 @@ is the very first element in the post content */
     line-height: 1.6em;
 }
 
+.gh-content > p img {
+  margin: 0 auto;
+}
+
 .page-template .gh-content:only-child > *:first-child:not(.kg-width-full) {
     margin-top: max(12vmin, 64px);
 }
@@ -2231,6 +2235,10 @@ html.dark-mode .site-header-content {
     color: #fff;
 }
 
+html.dark-mode .site-header-cover {
+    opacity: 1;
+}
+
 html.dark-mode .post-card-image {
     background: var(--color-darkmode);
 }
@@ -2314,14 +2322,6 @@ html.dark-mode .gh-content :not(pre) > code {
     color: #fff;
 }
 
-html.dark-mode .gh-content strong {
-    color: #fff;
-}
-
-html.dark-mode .gh-content em {
-    color: #fff;
-}
-
 html.dark-mode .gh-content code {
     color: #fff;
     background: #000;
@@ -2380,6 +2380,12 @@ html.dark-mode .kg-header-card h3.kg-header-card-subheader {
     color: #fff;
 }
 
+html.dark-mode .kg-bookmark-card a.kg-bookmark-container,
+html.dark-mode .kg-bookmark-card a.kg-bookmark-container:hover {
+    background: var(--color-darkmode) !important;
+    color: #fff !important;
+}
+
 html.dark-mode .footer-cta-title {
     color: #fff;
 }
@@ -2421,6 +2427,10 @@ html.dark-mode .footer-cta-title {
 
     html.auto-color .site-header-content {
         color: #fff;
+    }
+
+    html.auto-color .site-header-cover {
+        opacity: 1;
     }
 
     html.auto-color .post-card-image {
@@ -2506,14 +2516,6 @@ html.dark-mode .footer-cta-title {
         color: #fff;
     }
 
-    html.auto-color .gh-content strong {
-        color: #fff;
-    }
-
-    html.auto-color .gh-content em {
-        color: #fff;
-    }
-
     html.auto-color .gh-content code {
         color: #fff;
         background: #000;
@@ -2570,6 +2572,12 @@ html.dark-mode .footer-cta-title {
     html.auto-color .kg-header-card h2.kg-header-card-header,
     html.auto-color .kg-header-card h3.kg-header-card-subheader {
         color: #fff;
+    }
+
+    html.auto-color .kg-bookmark-card a.kg-bookmark-container,
+    html.auto-color .kg-bookmark-card a.kg-bookmark-container:hover {
+        background: var(--color-darkmode) !important;
+        color: #fff !important;
     }
 
     html.auto-color .footer-cta-title {
