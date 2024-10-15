@@ -9,7 +9,7 @@ The (old) default theme for [Ghost](http://github.com/tryghost/ghost/). This is 
 
 &nbsp;
 
-![screenshot-desktop](assets/screenshot-desktop.png)
+![screenshot-desktop](assets/screenshot-desktop.jpg)
 
 &nbsp;
 
