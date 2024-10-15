@@ -507,7 +507,7 @@ div:not(.gh-dropdown) > #navi *{
     margin-top: 0;
     width: fit-content;
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 @media only screen and (max-width: 767px) {
