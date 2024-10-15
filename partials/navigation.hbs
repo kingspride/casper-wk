@@ -2,6 +2,14 @@
     <!-- prepare menu with empty #navi element -->
     <ul id="navi" class="nav"></ul>
     <script>
+        function toggleMenu(parent){
+            if(!parent.classList.contains("open")){
+                parent.classList.add("open");
+            }else{
+                parent.classList.remove("open");
+            }
+        }
+
         /*
          * function that generates a JSON / JS Oject from Ghost Navigation Entries
          * parses [sub][main_entry_name]Sub Entry Name syntax
@@ -46,16 +54,31 @@
             if(typeof value === 'object'){
                 // create sub ul in main li
                 link.innerText = key;
-                link.href = value["url"];
                 var sub = document.createElement("ul");
+                {{#if @custom.navi_top_link}}
+                    var top_level_link = document.createElement("a");
+                    top_level_link.href = value["url"];
+                    var top_level_text = document.createElement("li");
+                    top_level_text.innerText = "{{@custom.navi_top_link_text}}";
+                    top_level_link.appendChild(top_level_text);
+                    sub.appendChild(top_level_link);
+                {{/if}}
+
+                link.setAttribute("onclick", "toggleMenu(this.parentElement)"); // only god knows why this is neccessary to keep it working.
+
+                // creates: ul > li > a (text and link to tag), 
+                //               li > ul 
+                //                    > a (link to tag) > li (text of tag)
+                //                    > a > li
+                //                    > a > li
                 Object.entries(value).forEach(([inner_key, inner_value]) => {
                     if(inner_key === "url") return;
                     var inner_li = document.createElement("li");
                     var inner_link = document.createElement("a");
-                    inner_link.innerText = inner_key;
                     inner_link.href = inner_value;
-                    inner_li.appendChild(inner_link);
-                    sub.appendChild(inner_li);
+                    inner_li.innerText = inner_key;
+                    inner_link.appendChild(inner_li);
+                    sub.appendChild(inner_link);
                 });
                 li.appendChild(link);
                 li.appendChild(sub);

@@ -38,7 +38,7 @@ production stylesheet in assets/built/screen.css
     --color-darkgrey: #15171A;
     --color-midgrey: #738a94;
     --color-lightgrey: #f1f1f1;
-    --color-secondary-text: #979797;
+    --color-secondary-text: #6EBF8B;
     --color-border: #e1e1e1;
     --color-wash: #e5eff5;
     --color-darkmode: #151719;
@@ -59,6 +59,9 @@ production stylesheet in assets/built/screen.css
 
 }
 
+*{
+    scroll-behavior: smooth !important;
+}
 
 /* 2. Layout - Page building blocks
 /* ---------------------------------------------------------- */
@@ -113,8 +116,8 @@ production stylesheet in assets/built/screen.css
     z-index: 100;
     display: flex;
     align-items: center;
-    padding-top: calc(19vmin + 44px);
-    padding-bottom: 19vmin;
+    padding-top: 43vh;
+    height: 100vh;
     text-align: center;
     color: var(--color-darkgrey);
 }
@@ -142,10 +145,31 @@ production stylesheet in assets/built/screen.css
 
 .site-header-inner {
     position: relative;
+    box-shadow: 0px 0px 90px 40px rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.23);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .site-header-content.left-aligned .site-header-inner {
     align-items: flex-start;
+}
+
+#scrollme{
+    z-index: 200;
+    bottom: 4em;
+    left: calc(50% - 32px);
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    fill: white;
+    color: white;
+    transition: 0.3s;
+}
+#scrollme:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    bottom: 4.3em;
+    color: var(--ghost-accent-color);
 }
 
 .site-logo {
@@ -166,6 +190,8 @@ production stylesheet in assets/built/screen.css
     padding: 0;
     font-size: 5rem;
     font-weight: 800;
+    padding-bottom: 20px;
+    border-bottom: 5px solid white;
 }
 
 .has-serif-title .site-title {
@@ -194,10 +220,10 @@ production stylesheet in assets/built/screen.css
 }
 
 :is(.site-logo, .site-title) + .site-description {
-    max-width: 640px;
-    margin-top: 16px;
+    max-width: 450px;
+    margin-top: 0;
     font-size: 2.4rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 1.4;
 }
 
@@ -230,7 +256,29 @@ production stylesheet in assets/built/screen.css
 
 @media (max-width: 991px) {
     .site-header-content {
-        padding-top: calc(19vmin + 32px);
+        height: initial;
+    }
+    .site-header-inner{
+        position: absolute;
+        top: 25vh;
+        left: 0; /* otherwise is offscreen */
+        box-shadow: none;
+    }
+    .site-title{
+        position: absolute;
+        left: 58vw;
+        max-width: 40vw;
+    }
+    .site-description {
+        position: absolute;
+        padding: initial;
+        top: 130pt;
+        left: 58vw;
+        max-width: 40vw !important;
+        font-size: 1.6rem !important;
+    }
+    #scrollme{
+        display: none;
     }
 }
 
@@ -245,9 +293,11 @@ production stylesheet in assets/built/screen.css
         max-width: 60%;
     }
     .site-title {
+        top: -20pt;
         font-size: 3.4rem !important;
     }
     .site-description {
+        display: none;
         font-size: 2.2rem !important;
     }
     .site-logo + .site-description {
@@ -281,8 +331,8 @@ production stylesheet in assets/built/screen.css
     right: 0;
     left: 0;
     z-index: 2000;
-    background-color: transparent;
     color: #fff;
+    background-color: rgba(0,0,0,0.6);
 }
 
 .gh-head a {
@@ -443,6 +493,7 @@ div:not(.gh-dropdown) > #navi *{
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
+    user-select: none;
 }
 #navi a:hover{
     cursor: pointer;
@@ -454,16 +505,35 @@ div:not(.gh-dropdown) > #navi *{
     padding: 0;
     margin-left: -5pt;
     margin-top: 0;
-    width: 100pt;
+    width: fit-content;
+    background-color: white;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 }
-#navi li ul li{
+@media only screen and (max-width: 767px) {
+    #navi li ul{
+        position: relative;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+#navi li a:has(+ ul)::before{
+    content: "▼";
+    padding-right: 5px;
+}
+#navi li ul a{
     display: block;
     padding-top: 5pt;
     padding-bottom: 5pt;
 }
 
-#navi li:hover ul{
+#navi li.open ul{
     display: block;
+}
+#navi li.open a:has(+ ul)::before{
+    content: "▲";
+    padding-right: 5px;
 }
 
 #navi li ul{
@@ -474,20 +544,18 @@ div:not(.gh-dropdown) > #navi *{
     display: none;
 }
 
-#navi li ul li:first-child{
+#navi li ul a:first-child{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     
 }
-#navi li ul li:last-child{
+#navi li ul a:last-child{
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
-#navi li ul li:hover{
+#navi li ul a:hover{
     cursor: pointer;
     background-color: var(--ghost-accent-color);
-}
-#navi li ul li:hover a{
     color: var(--ghost-accent-color-text);
 }
 
@@ -593,7 +661,7 @@ div:not(.gh-dropdown) > #navi *{
 .gh-head-menu .gh-dropdown li a {
     display: block;
     padding: 6px 20px;
-    color: #15171a;
+    color: var(--ghost-accent-color);
 }
 
 .is-dropdown-mega .gh-dropdown li a {
@@ -1347,6 +1415,8 @@ html.no-infinite-scroll .pagination {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
 }
 
 @media (max-width: 767px) {
@@ -1451,7 +1521,7 @@ is the very first element in the post content */
 
 /* Now the content typography styles */
 .gh-content a {
-    color: var(--ghost-accent-color);
+    color: var(--color-secondary-text);
     text-decoration: underline;
     word-break: break-word;
 }
@@ -2403,7 +2473,7 @@ html.dark-mode .footer-cta-title {
         background: var(--color-darkmode);
     }
 
-    html.auto-color img {
+    html.auto-color img:not(.pswp__img) {
         opacity: 0.9;
     }
 
