@@ -1,10 +1,15 @@
 # Casper
 
-The default theme for [Ghost](http://github.com/tryghost/ghost/). This is the latest development version of Casper! If you're just looking to download the latest release, head over to the [releases](https://github.com/TryGhost/Casper/releases) page.
+### Caution!
+This is a modified version of casper that implements simple dropdown sub menus, and changed the homepage to a fullscreen image with a scroll indicator.
+
+also, in darkmode, lightbox images are not dimmed anymore (0.9 opacity is dumb)
+
+The (old) default theme for [Ghost](http://github.com/tryghost/ghost/). This is the latest development version of Casper! If you're just looking to download the latest release, head over to the [releases](https://github.com/TryGhost/Casper/releases) page.
 
 &nbsp;
 
-![screenshot-desktop](https://user-images.githubusercontent.com/1418797/183329195-8e8f2ee5-a473-4694-a813-a2575491209e.png)
+![screenshot-desktop](assets/screenshot-desktop.png)
 
 &nbsp;
 
